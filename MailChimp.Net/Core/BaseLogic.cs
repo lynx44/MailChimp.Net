@@ -91,6 +91,7 @@ namespace MailChimp.Net.Core
         private MailChimpHttpClient FactoryProvidedHttpClient(string resource)
         {           
             var client = GetHttpClientFactory().CreateClient(_options.ApiKey ?? "OAuthMode");
+            client.DefaultRequestHeaders.ExpectContinue = false;
             return new MailChimpHttpClient(client, _options, resource);
         }
 #endif
@@ -107,6 +108,7 @@ namespace MailChimp.Net.Core
             {
                 BaseAddress = new Uri(GetBaseAddress())
             };
+            client.DefaultRequestHeaders.ExpectContinue = false;
             return new MailChimpHttpClient(client, _options, resource);
         }
 
